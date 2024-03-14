@@ -32,7 +32,6 @@ async function getMealsBySearch(term) {
 }
 
 function addMeal(mealData, random = false) {
-	console.log(mealData);
 	const meal = document.createElement('div');
 	meal.classList.add('meal');
 
@@ -110,6 +109,7 @@ function addMealToFav(mealData) {
 
 	const btn = favMeal.querySelector('button');
 	btn.addEventListener('click', () => {
+		document.querySelector('.fav-btn').classList.remove('active');
 		removeMealFromLS(mealData.idMeal);
 		fetchFavMeals();
 		favMeal.remove();
@@ -126,13 +126,12 @@ function addMealToFav(mealData) {
 function showMealInfo(mealData) {
 	mealInfoEl.innerHTML = '';
 	const mealEl = document.createElement('div');
-
+	mealEl.classList.add('meal-el')
 	const ingredients = [];
 	for (let i = 0; i <= 20; i++) {
 		if (mealData['strIngredient' + i]) {
 			const ingredient = `${mealData['strIngredient' + i]} - ${mealData['strMeasure' + i]}`;
 			ingredients.push(ingredient);
-			console.log(ingredients);
 		}
 	}
 
@@ -143,8 +142,10 @@ function showMealInfo(mealData) {
     <h3>Ingredients:</h3>
     <ul>
     ${ingredients.map((ing) => `<li>${ing}</li>`).join('')}
-    </ul>`;
-	console.log(mealEl);
+    </ul>
+		${mealData.strYoutube ? `<iframe class="video"
+		src="https://www.youtube.com/embed/${mealData.strYoutube.slice(-11)}">
+		</iframe>` : ''}`;
 	mealInfoEl.appendChild(mealEl);
 
 	mealPopup.classList.remove('hidden');

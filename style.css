@@ -198,3 +198,18 @@ header button {
 .popup h1 {
 	text-align: center;
 }
+
+.popup .meal-el {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	min-height: 100vh;
+}
+
+.popup .meal-el h3 {
+	margin: 0;
+}
+.popup .meal-el .video {
+	margin: 20px 0;
+	align-self: center;
+}
